@@ -1,0 +1,46 @@
+{% extends "myapp/layouts/layout.html" %}
+{% load static %}
+
+{% block content %}
+<div class="mainnav">
+</div>
+<nav class="navbar custom-navbar">
+  <div class="container-fluid d-flex align-items-center">
+    <div class="d-flex align-items-center brand-section">
+        <img class="navbar-logo"src="{% static 'images/newlogo-bgremoved.png' %}"/>
+        <p class="navbar-subtitle mb-0">महात्मा गांधी राष्ट्रीय ग्रामीण रोजगार गारंटी अधिनियम <br>
+            Mahatma Gandhi National Rural Employment Guarantee Act</p>
+    </div>
+      <button class="btn btn-outline-orange language-button" type="submit">हिन्दी/English</button>
+  </div>
+</nav>
+
+{% comment %} District selection section {% endcomment %}
+<div class="main-box text-center">
+      <h4 class="text-primary mb-3">
+        🌍 अपने ज़िले का प्रदर्शन देखें  
+      </h4> 
+      <h5 class=" mb-4">See Your District’s Performance</h5>
+
+      <div class="mb-3">
+        <label for="district" class="form-label fw-bold">🏡 अपना जिला चुनें <br>Select Your District</label>
+        <select id="district" class="form-select">
+          <option selected disabled>🔍 जिला खोजें या चुनें(Search or Choose District)</option>
+          <option value="lucknow">लखनऊ (Lucknow)</option>
+          <option value="kanpur">कानपुर (Kanpur)</option>
+          <option value="varanasi">वाराणसी (Varanasi)</option>
+          <option value="agra">आगरा (Agra)</option>
+          <option value="prayagraj">प्रयागराज (Prayagraj)</option>
+        </select>
+      </div>
+
+      <div class="d-grid gap-2">
+        <button class="btn btn-theme">📊 प्रदर्शन देखें(View Performance)</button>
+        <button class="btn btn-outline-success">📍 अपने आप पहचानें(Detect Automatically)</button>
+      </div>
+    </div>
+
+
+{% endblock content %}
+
+

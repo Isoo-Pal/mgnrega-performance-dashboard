@@ -1,0 +1,158 @@
+{% extends "myapp/layouts/layout.html" %}
+
+{% block content %}
+
+<div class="container my-5">
+    <h4 class="text-center text-primary mb-4">
+      📊 वर्तमान माह का अवलोकन  
+      <br>
+      <small class="text-muted">Current Month Overview</small>
+    </h4>
+
+    <div class="row g-3">
+
+      <!-- Total Workers -->
+      <div class="col-6 col-md-3">
+        <div class="overview-card text-center" style="background-color: #FF9933;">
+          <div class="icon">👷‍♂️</div>
+          <h5 class="fw-bold">1,20,000</h5>
+          <p class="mb-0">कुल श्रमिक<br><small>(Total Workers)</small></p>
+        </div>
+      </div>
+
+      <!-- Avg Work Days -->
+      <div class="col-6 col-md-3">
+        <div class="overview-card text-center" style="background-color: #4CAF50;">
+          <div class="icon">📅</div>
+          <h5 class="fw-bold">56 दिन</h5>
+          <p class="mb-0">औसत कार्य दिवस<br><small>(Avg Work Days)</small></p>
+        </div>
+      </div>
+
+      <!-- Wages Paid -->
+      <div class="col-6 col-md-3">
+        <div class="overview-card text-center" style="background-color: #2196F3;">
+          <div class="icon">💰</div>
+          <h5 class="fw-bold">92%</h5>
+          <p class="mb-0">भुगतान हुआ<br><small>(Wages Paid)</small></p>
+        </div>
+      </div>
+
+      <!-- Active Projects -->
+      <div class="col-6 col-md-3">
+        <div class="overview-card text-center" style="background-color: #9C27B0;">
+          <div class="icon">🏗️</div>
+          <h5 class="fw-bold">210</h5>
+          <p class="mb-0">सक्रिय परियोजनाएँ<br><small>(Active Projects)</small></p>
+        </div>
+      </div>
+
+    </div>
+</div>
+
+{% comment %} charts {% endcomment %}
+<div class="container my-4">
+    <h4 class="text-center text-primary mb-4">
+      📈 ऐतिहासिक प्रवृत्तियाँ  
+      <br>
+      <small class="text-muted">Historical Trends</small>
+    </h4>
+
+    <div class="row g-4">
+      <!-- Line Chart: Workers Over Time -->
+      <div class="col-12 col-md-6">
+        <div class="chart-card">
+          <h5>👷‍♂️ समय के साथ श्रमिकों की संख्या
+            <br>
+            <small class="text-muted">Workers Over Time</small>
+        </h5>
+          <canvas id="workersChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Bar Chart: Wages Paid % per Month -->
+      <div class="col-12 col-md-6">
+        <div class="chart-card">
+          <h5>💰 प्रति माह भुगतान की गई मजदूरी (%)”
+            <br>
+            <small class="text-muted">Wages Paid % per Month</small>
+            </h5>
+          <canvas id="wagesChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Pie Chart: Active Projects Category -->
+      <div class="col-12">
+        <div class="chart-card">
+          <h5>🏗️ सक्रिय परियोजनाओं की श्रेणी
+            <br>
+            <small class="text-muted">Active Projects Category</small>
+            </h5>
+          <canvas id="projectsChart"></canvas>
+        </div>
+      </div>
+    </div>
+</div>
+
+<script>
+    // Line Chart: Workers Over Time
+    const workersCtx = document.getElementById('workersChart').getContext('2d');
+    new Chart(workersCtx, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'श्रमिक(Workers)',
+          data: [100000, 115000, 120000, 118000, 130000, 125000],
+          borderColor: '#4CAF50', // green
+          backgroundColor: 'rgba(76, 175, 80, 0.2)',
+          borderWidth: 2,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: { y: { beginAtZero: false } }
+      }
+    });
+
+    // Bar Chart: Wages Paid % per Month
+    const wagesCtx = document.getElementById('wagesChart').getContext('2d');
+    new Chart(wagesCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'भुगतान की गई मजदूरी(Wages Paid) (%)',
+          data: [85, 88, 92, 80, 95, 90],
+          backgroundColor: ['#E53935', '#FB8C00', '#4CAF50', '#E53935', '#4CAF50', '#FB8C00']
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: { y: { beginAtZero: true, max: 100 } }
+      }
+    });
+
+    // Pie Chart: Active Projects Category
+    const projectsCtx = document.getElementById('projectsChart').getContext('2d');
+    new Chart(projectsCtx, {
+      type: 'pie',
+      data: {
+        labels: ['सड़कें(Roads)', 'जल कार्य(Water Works)', 'आवास(Housing)', 'अन्य(Other)'],
+        datasets: [{
+          data: [40, 25, 20, 15],
+          backgroundColor: ['#4CAF50', '#FB8C00', '#E53935', '#9C27B0']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom' }
+        }
+      }
+    });
+  </script>
+
+
+{% endblock content %}
